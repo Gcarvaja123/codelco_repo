@@ -1,0 +1,248 @@
+HTML CSSResult Skip Results Iframe
+EDIT ON
+* {
+  box-sizing: border-box;
+}
+
+.head{
+  padding: 30px;
+}
+html,
+body {
+  background-color: #F4F4F4;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}
+
+
+#file{
+    max-width: 80%;
+}
+
+.responstable {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1400px;
+  display: grid;
+  border-collapse: collapse;
+  grid-template-columns: 
+    minmax(150px, 3fr)
+    minmax(100px, 1fr)
+    minmax(100px, 1fr)
+    minmax(150px, 1fr)
+}
+
+table.responstable  thead
+  {
+  display: contents;
+}
+
+table.responstable  tbody{
+  display: contents;
+}
+
+table.responstable tr {
+  display: contents;
+}
+
+.responstable th,td{
+  padding: 8px;
+  text-align: left;
+}
+
+#container1{
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 95%;
+  background-color: white;
+}
+
+hr{
+  background-color: #F2EFFD;
+  height: 2px;
+  border:0;
+  width: 98%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.titlerequisitos{
+  font-size: 30px;
+  padding-left: 20px;
+  padding-top: 8px;
+}
+
+
+
+.options ul{
+  display: inline-block;
+
+}
+.buscador{
+  margin-left: 15px;
+  font-size: 17px;
+}
+.nuevorequisito{
+
+  float: right;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  height: 40px;
+}
+
+#container2 {
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: 10px;
+}
+
+#myChart1{
+  margin-top: 20px;
+  max-width: 500px;
+  max-height: 200px;
+  margin-left: 150px;
+  align-content: center;
+
+}
+
+#myChart2{
+  margin-top: 20px;
+  max-width: 500px;
+  max-height: 200px;
+  margin-left: 150px;
+  align-content: center;
+
+}
+
+#myChart5{
+  margin-top: 20px;
+  max-width: 400px;
+  max-height: 400px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#myChart6{
+  margin-top: 20px;
+  max-width: 800px;
+  max-height: 400px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+table {
+  border-collapse: collapse;
+  width: 90%;
+  padding: 20px;
+
+}
+
+th, td {
+  text-align: left;
+  padding: 2px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+  background-color: #04AA6D;
+  color: white;
+}
+
+#container3 {
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: 10px;
+}
+
+p{
+  text-align: center;
+  font-size: 20px;
+}
+
+#container4 {
+  display: grid;
+  grid-template-rows: auto auto;
+  padding: 10px;
+}
+#container5 {
+  display: grid;
+  grid-template-rows: auto auto;
+  padding: 10px;
+}
+#container6 {
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: 10px;
+}
+
+#container6 td,th{
+  text-align: left;
+}
+
+.puertas-mina{
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+
+th{
+  padding: 8px;
+}
+td{
+  padding: 2px;
+}
+
+.btn-info {
+    color: black;
+    background-color: #04AA6D;
+    font-size: 16px;
+}
+
+.btn-info:hover{
+  background-color: #04AA6D;
+}
+
+.btn-info.focus, .btn-info:focus {
+    color: #fff;
+    background-color: #04AA6D;
+    border-color: #1b6d85;
+}
+
+.btn-info:active:focus{
+  background-color: #04AA6D;
+}
+
+.responstable label{
+  margin-top: 7px;
+  font-size: 16px;
+}
+
+#myModal{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.modal-content{
+  
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.modal-dialog{
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.modal-dialog p{
+  text-align: left;
+}

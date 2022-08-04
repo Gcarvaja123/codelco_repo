@@ -1,0 +1,110 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    script(src='/socket.io/socket.io.js')
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    link(rel='stylesheet' type='text/css' href='/css/style.css')
+    link(rel='stylesheet' type='text/css' href='/css/table.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js')
+    script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js')
+
+
+      
+    script(type='text/javascript' src='/scripts/table.js')
+    script.
+      var local_data = !{JSON.stringify(Requisitosnoaceptados)};
+    title Hello World Simple App
+
+
+  block content
+    .head
+    div.grid-container(ng-app='myApp' ng-controller='myController')           
+      ul
+          button.nuevorequisito(ng-click='Nuevorequisito()' type='button' )  Nuevo requisito
+      table.responstable
+        tr
+          th Nombre del requisito
+          th Descripción
+          th(ng-click='Orderbyvalue()') Urgencia  
+          th(ng-click='Orderbydate()') Fecha ingresada
+          th Fecha inicio
+          th Fecha Termino
+          th
+          th
+          th
+        tr(ng-repeat='movies in requirementsArray')
+          td
+            label {{movies.Nombre}}
+          td
+            label {{movies.Descripcion }}
+          td
+            label(for='file')
+            progress#file(max='5' value='{{movies.Urgencia}}')
+          td
+            label {{movies.Fecha_ingreso}}
+          td
+            input(type='date' ng-model='movies.datestart')
+          td
+            input(type='date' ng-model='movies.datefinish')
+          td
+            input.btn.btn-info.btn-lg(type='button' ng-click="edit($index)" value="Detalles" data-toggle='modal' data-target='#myModal' )
+          td
+            input.btn.btn-info.btn-lg(type='button' ng-click="removeRow($index)" value="Eliminar")
+            
+          td.checkbox
+            input(type='checkbox' ng-model='movies.Accept')
+      ul.blur
+        li  
+        li
+          button(ng-click='Acceptrequirements()')  Aceptar requisitos
+      
+      ul
+        li Requisitos aceptados
+      table.responstables
+        tbody
+          tr
+            th No.
+            th Nombre del requisito
+            th Descripción
+            th Urgencia
+            th fecha ingresada
+            th Fecha inicio
+            th Fecha Termino
+          tr(ng-repeat='moviess in acceptedArray')
+            td
+              label {{$index + 1}}
+            td
+              label {{moviess.Nombre}}
+            td
+              label {{moviess.Descripcion}}
+            td
+              label(for='file')
+              progress#file(max='5' value='{{moviess.Urgencia}}')
+            td
+              label {{moviess.Fecha_ingreso}}
+            td
+              label {{moviess.Fecha_inicio}}
+            td
+              label {{moviess.Fecha_termino}}
+            
+      ul
+        li  
+        li
+          button(ng-click='Submitdate()')  Enviar horarios
+
+      #myModal.modal.fade(role='dialog')
+        .modal-dialog
+          // Modal content
+          .modal-content
+            .modal-header
+              button.close(type='button' data-dismiss='modal') ×
+              h4.modal-title {{Titulo}}
+            .modal-body
+              p Some text in the modal.
+            .modal-footer
+              button.btn.btn-default(type='button' data-dismiss='modal') Close

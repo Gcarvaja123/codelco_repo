@@ -1,0 +1,321 @@
+doctype html
+html
+  head-
+    script(type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
+    script(type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js')
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css' integrity='sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx' crossorigin='anonymous')
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css')
+    script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js' integrity='sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa' crossorigin='anonymous')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    link(rel='stylesheet' type='text/css' href='/css/sistemanuevocopia.css')
+    script(src='https://cdn.zingchart.com/zingchart.min.js')
+    script(src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/374756/zingchart-angularjs-1.0.4.js')
+
+
+
+    
+
+    script.
+      local_data = !{JSON.stringify(cantidadesprueba)};
+      local_data_asistencia = !{JSON.stringify(totalasistencias)};
+      local_data_brocales = !{JSON.stringify(totalbrocales)};
+      
+  body(ng-app='myApp')
+
+    
+    aside#sidenav-main.sidenav.navbar.navbar-vertical.navbar-expand-xs.border-0.border-radius-xl.my-3.fixed-start.ms-3.bg-gradient-dark.ps.bg-white
+      .sidenav-header
+      hr.horizontal.light.mt-2.mb-2
+      #sidenav-collapse-main.navbar-collapse.w-auto.ps
+        ul.navbar-nav
+          li.nav-item
+            a.tablink.w3-red(onclick="openCity(event,'Asistencia')") Asistencia
+          li.nav-item
+            a.tablink(onclick="openCity(event,'Planmatriz')") Plan matriz
+          li.nav-item
+            a.tablink(onclick="openCity(event,'Brocales')") Servicio y limpieza brocales
+          li.nav-item
+            a.tablink(onclick="openCity(event,'Disciplina')") Disciplina operacional
+    .main
+      #Modalfiles.modal.fade( aria-labelledby='Modalfiles' )
+        form.formasistencias(action='/' method='post' enctype='multipart/form-data')
+          .modal-dialog
+            .modal-content
+              .modal-header
+                h5#exampleModalLabel.modal-title Ingreso de archivos
+                button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+              .modal-body
+                .container
+                  .mb-3
+                    label.form-label(for='formFileMultiple') Asistencia
+                    input#formFileMultiple.form-control(type='file' name="Asistencia" multiple='')
+                  .mb-3
+                    label.form-label(for='formFileMultiple') Plan matriz
+                    input#formFileMultiple.form-control(type='file' name="Matriz" multiple='')
+                  .mb-3
+                    label.form-label(for='formFileMultiple') Servicio y limpieza brocales
+                    input#formFileMultiple.form-control(type='file' name="Brocales" multiple='')
+                  .mb-3
+                    label.form-label(for='formFileMultiple') Disciplina operacional
+                    input#formFileMultiple.form-control(type='file' name="Disciplina" multiple='')
+              .modal-footer
+                button.btnn(type='button' data-bs-dismiss='modal') Cerrar
+                button.btnn(name="probando3" value="probando4") Aceptar
+      #Asistencia.w3-container.w3-border.city(ng-controller='myControllerAsistencia')
+        .grid-container
+          div.rectangulo Asistencias agregadas : {{cantidadingresos.length}}
+          div.rectangulo Asistencias del mes : {{ingresosmes}} 
+          div.rectangulo Colocar alguna otra estadística
+        h2 Asistencia
+        //form.formasistencia(action='/' method='post' enctype='multipart/form-data')
+        //  input(type='file' name='asistencia')
+        //  button(name='ingreso' value="asistencia") Ingresar
+        button.btnn(type='button' data-bs-toggle='modal' data-bs-target='#Modalfiles') Ingresar archivos
+        p
+        div
+          select.selectasistencia( ng-model='columns' ng-init='columns="Turno"' ng-options='e for e in headers' )
+            option(value='')
+          | Ingresar valor para filtrar :
+          input( type='text' ng-model='searchtxt[columns]' placeholder='Ingresar')
+          br
+          p
+          select.selectmonth(  ng-model='selectedMonth' ng-options='x for x in months')
+          p
+          table.Asistencia.table.caption-top
+            thead
+              tr
+                th(data-type="text")
+                  | Sector
+                  span.resize-handle
+                th(data-type='text')
+                  | Nombre
+                  span.resize-handle
+                th(data-type='text-long')
+                  | Rut
+                  span.resize-handle
+                th(data-type='text-long')
+                  | Cargo
+                  span.resize-handle
+                th(data-type='text-long')
+                  | Turno
+                  span.resize-handle
+                th(data-type='text-long')
+                  | Fecha ingreso
+                  span.resize-handle
+            tbody
+              tr(ng-repeat="asistencia in Totalasistencia|filter:searchtxt|datefilter:selectedMonth ")
+                td
+                  label {{asistencia.Sector}} 
+                td
+                  label {{asistencia.Nombre}} 
+                td
+                  label {{asistencia.Rut}}
+                td
+                  label {{asistencia.Cargo}}
+                td
+                  label {{asistencia.Turno}}
+                td
+                  label {{asistencia.Fechaingreso}}
+
+      #Planmatriz.w3-container.w3-border.city(style='display:none')
+        h2 Plan matriz
+        .grid-container
+          div.rectangulo Estadística
+          div.rectangulo Estadística
+          div.rectangulo Estadística
+        
+        //form(action='/' method='post' enctype='multipart/form-data')
+        //  input(type='file' name='avatar')
+        //  button(name='ingreso' value="planmatriz") submit
+        button.btnn(type='button' data-bs-toggle='modal' data-bs-target='#Modalfiles') Ingresar archivos
+        //div(ng-controller='myController')
+        p
+        h2 Aire Acondicionado
+        #gridplanmatriz1.grid-container
+          #matriz1-grid-item
+            div.matriz(ng-controller='MainController2' )
+                .matrizheader 
+                #chart-12(zingchart='' zc-json='myJsonmatrizpie' zc-width='100%' zc-height='300px')
+          #matriz2.grid-item
+            #acondicionado
+              div.matriz(ng-controller='MainController2' )
+                .matrizheader 
+                  #chart-11(zingchart='' zc-json='myJsonmatrizbar' zc-width='100%' zc-height='400px')
+                  
+                
+          
+          
+      #Brocales.w3-container.w3-border.city(style='display:none' ng-controller='myControllerBrocales')
+        .container
+
+          #Modalbrocales.modal.fade( aria-labelledby='Modalbrocales' )
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  h5#exampleModalLabel.modal-title Detalles de los servicios
+                  button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                .modal-body
+                  div
+                    table.responstable.table.caption-top
+                      thead
+                        tr
+                          th(data-type='numeric')
+                            | Fecha
+                            span.resize-handle
+                          th(data-type='text-long')
+                            | Turno
+                            span.resize-handle
+                          th(data-type='text-long')
+                            | Ubicación
+                            span.resize-handle
+                          th(data-type='text-long')
+                            | Unidad
+                            span.resize-handle
+                          th(data-type='text-long')
+                            | Cantidad
+                            span.resize-handle
+                          th(data-type='text-long')
+                            | Actividad
+                            span.resize-handle
+                          th(data-type='text-long')
+                            | Observaciones
+                            span.resize-handle
+                          th(data-type='text-long')
+                            | Sub
+                            span.resize-handle
+                      tbody
+                        tr(ng-repeat='brocales in Totalbrocalessubmodal')
+                          td
+                            label {{brocales.Fecha}} 
+                          td
+                            label {{brocales.Turno}}
+                          td
+                            label {{brocales.Ubicacion}}
+                          td
+                            label {{brocales.Unidad}}
+                          td
+                            label {{brocales.Cantidad}}
+                          td
+                            label {{brocales.Actividad}}
+                          td
+                            label {{brocales.Observaciones}}
+                          td
+                            label {{brocales.Sub}}
+                .modal-footer
+                  button.btn.btn-secondary(type='button' data-bs-dismiss='modal') Cerrar
+        h2 Servicio y limpieza de brocales  
+        .grid-container
+          div.rectangulo Estadística
+          div.rectangulo Estadística
+          div.rectangulo Estadística
+        
+        //form(action='/' method='post' enctype='multipart/form-data')
+        //  input(type='file' name='brocales')
+        //  button(name='ingreso' value="brocales") Ingresar
+        button.btnn(type='button' data-bs-toggle='modal' data-bs-target='#Modalfiles') Ingresar archivos
+        select.selectmonths(  ng-model='selectedMonthBrocales' ng-options='x for x in monthsbrocales' ng-change="changeView()" ) 
+        #gridbrocales.grid-container
+          #brocal1.grid-item Sub 5
+            div
+              table.table6brocales.table.caption-top
+                thead
+                  tr
+                    th(data-type='numeric')
+                      | N° Brocales Diario/ meta semana, mes
+                      span.resize-handle
+                    th(data-type='text-long')
+                      | Dotación x turno
+                      span.resize-handle
+                    th(data-type='text-long')
+                      | Disponibilidad equipos
+                      span.resize-handle
+                tbody
+                  tr(ng-repeat='brocalesmin in Totalbrocalessub6min|Cantidadfilter:[Totalbrocalessub6,selectedMonthBrocales] ')
+                    td
+                      label {{brocalesmin.cantidadTotal}} 
+                    td
+                      label {{brocalesmin.Dotacion}}
+                    td
+                      label {{brocalesmin.Disponibilidad}}
+            p 
+            button.tablinkbrocalsub6.w3-red(onclick="openViewsub6(event,'Anualsub6')" display="block") Anual
+            button.tablinkbrocalsub6(onclick="openViewsub6(event,'Mensualsub6')" ) Mes
+            //button.btnn(ng-model='openmodalsub6' ng-click="modalbrocalessub6()" type='button' data-bs-toggle='modal' data-bs-target='#Modalbrocales' ) Ver detalles
+            p
+            #Anualsub6.w3-container.w3-border.viewsub6
+              div.graphsub6(ng-controller='MainController' class="border" )
+                .grapheader 
+                  div Vision Anual
+                hr.graphr
+                #chart-1(zingchart='' zc-json='myJsonAnualsub6' zc-width='100%' zc-height='408px' visibility="hidden" )
+                hr.graphr
+                .graphfooter(ng-model='openmodalsub6' ng-click="modalbrocalessub6()" type='button' data-bs-toggle='modal' data-bs-target='#Modalbrocales')
+                  div Ver detalles
+                    i.bi.bi-chevron-right
+            #Mensualsub6.w3-container.w3-border.viewsub6(style='display:none')
+              div.graphsub6(ng-controller='MainController' class="border")
+                .grapheader 
+                  div Vision Anual
+                hr.graphr
+                #chart-2(zingchart='' zc-json='myJsonMensualsub6' zc-width='100%' zc-height='408px' visibility="hidden" )
+                hr.graphr
+                .graphfooter(ng-model='openmodalsub6' ng-click="modalbrocalessub6()" type='button' data-bs-toggle='modal' data-bs-target='#Modalbrocales')
+                  div Ver detalles
+                    i.bi.bi-chevron-right
+          #brocal2.grid-item Sub 6
+            div
+              table.table.caption-top
+                thead
+                  tr
+                    th(data-type='numeric')
+                      | N° Brocales Diario/ meta semana, mes
+                      span.resize-handle
+                    th(data-type='text-long')
+                      | Dotación x turno
+                      span.resize-handle
+                    th(data-type='text-long')
+                      | Disponibilidad equipos
+                      span.resize-handle
+                tbody
+                  tr(ng-repeat='brocalesmin in Totalbrocalessub7min|Cantidadfilter:[Totalbrocalessub7,selectedMonthBrocales] ')
+                    td
+                      label {{brocalesmin.cantidadTotal}} 
+                    td
+                      label {{brocalesmin.Dotacion}}
+                    td
+                      label {{brocalesmin.Disponibilidad}}
+            p
+            button.tablinkbrocalsub7.w3-red(onclick="openViewsub7(event,'Anualsub7')" display="block") Anual
+            button.tablinkbrocalsub7(onclick="openViewsub7(event,'Mensualsub7')" ) Mes
+            //button.btnn(ng-model='openmodalsub7' type='button' data-bs-toggle='modal' data-bs-target='#Modalbrocales' ng-click="modalbrocalessub7()") Ver detalles
+            p
+            #Anualsub7.w3-container.w3-border.viewsub7
+              div.graphsub7(ng-controller='MainController' class="border" )
+                .grapheader 
+                  div Vision Anual
+                hr.graphr
+                #chart-3(zingchart='' zc-json='myJsonAnualsub7' zc-width='100%' zc-height='408px' visibility="hidden" )
+                hr.graphr
+                .graphfooter(ng-model='openmodalsub7' ng-click="modalbrocalessub7()" type='button' data-bs-toggle='modal' data-bs-target='#Modalbrocales')
+                  div Ver detalles
+                    i.bi.bi-chevron-right
+            #Mensualsub7.w3-container.w3-border.viewsub7(style='display:none')
+              div.graphsub7(ng-controller='MainController' class="border" )
+                .grapheader 
+                  div Vision Anual
+                hr.graphr
+                #chart-4(zingchart='' zc-json='myJsonMensualsub7' zc-width='100%' zc-height='408px' visibility="hidden" )
+                hr.graphr
+                .graphfooter(ng-model='openmodalsub7' ng-click="modalbrocalessub7()" type='button' data-bs-toggle='modal' data-bs-target='#Modalbrocales')
+                  div Ver detalles
+                    i.bi.bi-chevron-right
+       
+
+        p
+        
+      #Disciplina.w3-container.w3-border.city(style='display:none')
+        h2 Disciplina operacional
+        form(action='/' method='post' enctype='multipart/form-data')
+          input(type='file' name='disciplina')
+          button(name='ingreso' value="disciplina") submit
+  script(type='text/javascript' src='/scripts/sidebar.js')

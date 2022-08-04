@@ -1,0 +1,68 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet' type='text/css' href='/css/requisito.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js')
+    script(src='/socket.io/socket.io.js')
+    
+    link(rel='stylesheet' type='text/css' href='/css/requisito.css')
+    
+
+    script(src='/bower_components/angular/angular.js')
+    script(src='/bower_components/angular-strap/dist/angular-strap.min.js')
+    script(src='/bower_components/angular-strap/dist/angular-strap.tpl.min.js')
+    script.
+      var local_data = !{JSON.stringify(RequirementsArrays)};
+      //var local_data = "#{RequirementsArrays}"
+    script(type='text/javascript' src='/scripts/requisito.js')
+
+    
+
+
+    
+  block content
+
+    div(ng-app='notebooks' ng-controller='RequirementListCtrl')
+      #Formulario()  
+        .container
+          form(action='/nuevorequisito', method='post')
+            div(class='form-group')
+              .col-25
+                label(for='a') Nombre del requisito
+              .col-75
+                input#Srequisito( type='text' name='nombrerequisito' placeholder='Su requisito..' ng-model="Nombre")
+            .row
+              .col-25
+                label(for='lname') Alguna otra información
+              .col-75
+                input#Salgo(type='text' name='algo' placeholder='Algo..')
+            div(class='form-group')
+              .col-25
+                label(for='s') Descripción
+              .col-75
+                textarea#descripcion(name='descripcion' placeholder='Escribe algo..' style='height:200px' ng-model="Descripcion")
+            .row
+              .col-25
+                label(for='urg') Urgencia
+              .col-75
+                select.form-select(name='opcion' aria-label='Default select example' ng-model="opcionseleccionada")
+                  option(selected='') Abrir opciones
+                  option(value='1') 1
+                  option(value='2') 2
+                  option(value='3') 3
+                  option(value='4') 4
+                  option(value='5') 5
+            br
+            .row
+              input(type='submit' value='Ingresar')
+
+      
+
+      #notebooks()
+        input#query(type='text' ng-model='query')
+        ul#notebook_ul
+          li(ng-repeat='requirement in RequirementsArray | filter:query | orderBy: orderList')
+            option(ng-click='Completerequirement(requirement.Nombre)') {{requirement.Nombre}}
+        span Numero de requisitos: {{RequirementsArray.length}}

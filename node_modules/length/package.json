@@ -1,0 +1,24 @@
+{
+  "name": "length",
+  "version": "0.0.1",
+  "description": "Time lengths for humans",
+  "main": "index.js",
+  "scripts": {
+    "test": "tap test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Submersible/node-length.git"
+  },
+  "keywords": [
+    "time",
+    "length",
+    "human"
+  ],
+  "author": "Ryan Munro <ryan@subc.io>",
+  "license": "MIT",
+  "devDependencies": {
+    "uglify-js": "~2.2.3",
+    "tap": "~0.4.0"
+  }
+}

@@ -1,0 +1,98 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    script(src='/socket.io/socket.io.js')
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    link(rel='stylesheet' type='text/css' href='/css/style.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js')
+    script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js')
+    link(rel='stylesheet' type='text/css' href='/css/table.css')
+
+
+
+      
+    script(type='text/javascript' src='/scripts/table.js')
+    script.
+      var local_data = !{JSON.stringify(Requisitosnoaceptados)};
+    title Hello World Simple App
+
+
+  block content
+    .head
+    div(ng-app='myApp' ng-controller='myController')           
+      div.grid-container
+          td
+            label.titlerequisitos Requisitos ingresados
+          hr
+          .options
+              input.buscador(type='text' placeholder='Filtrar requisito..' ng-model="search")
+              button.nuevorequisito(ng-click='Nuevorequisito()' type='button' )  Nuevo requisito
+              button(ng-click='probando()' type = 'button') tócame
+          table.responstable
+            thead
+              tr
+                th(data-type='numeric')
+                  | Nombre
+                  span.resize-handle
+                th(data-type='text-short' ng-click='Orderbyvalue()')
+                  | Urgencia
+                  span.resize-handle
+                th(data-type='text-short' ng-click='Orderbydate()')
+                  | Fecha ingreso
+                  span.resize-handle
+                th(data-type='text-long')
+                  | Fecha inicio
+                  span.resize-handle
+                th(data-type='text-short')
+                  | Fecha termino
+                  span.resize-handle
+                th(data-type='text-long')
+                  | Editar
+                  span.resize-handle
+                th(data-type='text-short')
+                  | Eliminar
+                  span.resize-handle
+                th(data-type='text-short')
+                  | Aceptar
+                  span.resize-handle
+            tbody
+              tr(ng-repeat='movies in requirementsArray | filter:search')
+                td 
+                  label {{movies.Nombre}}
+                  
+                td
+                  progress#file(max='5' value='{{movies.Urgencia}}')
+                td
+                  label {{movies.Fecha_ingreso}}
+                td
+                  input(type='date' ng-model='movies.datestart')
+                td
+                  input(type='date' ng-model='movies.datefinish')
+                td
+                  input.btn.btn-info.btn-lg(type='button' ng-click="edit($index)" value="Detalles" data-toggle='modal' data-target='#myModal' )
+                td
+                  input.btn.btn-info.btn-lg(type='button' ng-click="removeRow($index)" value="Eliminar")
+                  
+                td
+                  input.checkbox(type='checkbox' ng-model='movies.Accept')
+      
+        button(ng-click='Acceptrequirements()')  Aceptar requisitos
+     
+        button(ng-click='Submitdate()')  Enviar horarios
+
+      #myModal.modal.fade(role='dialog')
+        .modal-dialog
+          // Modal content
+          .modal-content
+            .modal-header
+              button.close(type='button' data-dismiss='modal') ×
+              h4.modal-title {{Titulo}}
+            .modal-body
+              p Some text in the modal.
+            .modal-footer
+              button.btn.btn-default(type='button' data-dismiss='modal') Close

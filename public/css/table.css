@@ -1,0 +1,128 @@
+HTML CSSResult Skip Results Iframe
+EDIT ON
+* {
+  box-sizing: border-box;
+}
+
+.head{
+  padding: 30px;
+}
+html,
+body {
+  background-color: #F4F4F4;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}
+
+.responstable {
+  width: 98%;
+  overflow-y: scroll;
+  margin-left: auto;
+  margin-right: auto;
+  max-height: 500px;
+  display: grid;
+  border-collapse: collapse;
+  grid-template-columns: 
+    minmax(150px, 2fr)
+    minmax(100px, 0.7fr)
+    minmax(100px, 0.5fr)
+    minmax(150px, 0.9fr)
+    minmax(150px, 0.9fr)
+    minmax(50px, 0.7fr)
+    minmax(100px, 0.7fr)
+    minmax(50px, 0.5fr);
+}
+
+.responstable thead,
+.responstable tbody,
+.responstable tr {
+  display: contents;
+}
+
+
+
+.responstable th,
+td {
+  padding: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.responstable th {
+  position: sticky;
+  top: 0;
+  background: #6c7ae0;
+  text-align: left;
+  font-weight: normal;
+  font-size: 12px;
+  color: white;
+}
+
+.responstable th:last-child {
+  border: 0;
+}
+
+.responstable td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #808080;
+}
+
+.responstable td{
+  background: white;
+}
+.responstable tr:nth-child(even) td {
+  background: #F2EFFD;
+}
+
+.checkbox{
+  text-align: center;
+}
+
+#file{
+    max-width: 80%;
+}
+
+.grid-container{
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 95%;
+  background-color: white;
+}
+
+hr{
+  background-color: #F2EFFD;
+  height: 2px;
+  border:0;
+  width: 98%;
+}
+
+.titlerequisitos{
+  font-size: 30px;
+  padding-left: 20px;
+  padding-top: 8px;
+}
+
+
+
+.options ul{
+  display: inline-block;
+
+}
+.buscador{
+  margin-left: 15px;
+  font-size: 17px;
+}
+.nuevorequisito{
+
+  float: right;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  height: 40px;
+}
